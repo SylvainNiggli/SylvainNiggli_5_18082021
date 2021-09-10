@@ -2,7 +2,6 @@ let productList = document.getElementById("product-list");
 fetch('http://localhost:3000/api/cameras')
     .then(response => response.json())
     .then(data => {
-        console.log(data);
         data.forEach(element => {
             let cpt = 0;
             productList.innerHTML += `<div class="col-6 mt-5">

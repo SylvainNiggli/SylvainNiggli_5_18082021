@@ -2,35 +2,43 @@ function send(e) {
     let contact = {
         firstName: document.getElementById("firstName").value,
         lastName: document.getElementById("lastName").value,
-        adress: document.getElementById("adress").value,
+        address: document.getElementById("address").value,
         city: document.getElementById("city").value,
         email: document.getElementById("email").value
     };
 
     let products = JSON.parse(localStorage.getItem("cart"));
+    let productList = [];
+
+    for(element of products){
+
+      productList.push(element.id);
+    }
 
     let data = {
         contact: contact,
-        products: products
+        products: productList
     };
+
     e.preventDefault();
-    fetch("http://localhost:3000/api/cameras/order", {
+    const options = {
       method: "POST",
+      body: JSON.stringify(data),
       headers: {
         'Accept': 'application/json', 
         'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({value: data})
-    })
+      }     
+    };
+    fetch("http://localhost:3000/api/cameras/order", options)
     .then(function(res) {
       if (res.ok) {
         return res.json();
       }
     })
     .then(function(value) {
-        document
-          .getElementById("result")
-          .innerText = value.postData.text;
+          console.log(value);
+          localStorage.setItem("confirmation", JSON.stringify(value));
+          window.location = "confirmation.html";
     });
   }
   

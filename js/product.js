@@ -31,7 +31,9 @@ fetch(`http://localhost:3000/api/cameras/${id}`)
             <input type="number" id="quantity" name="quantity" min="1" max="9" value="1">
             <p></p>
             <button type="button" id="add-cart" class="btn btn-primary">Ajouter au panier</button>
-        </div>`;
+            <div class="invisible" id="add-product-msg">Produit ajouté !</div>
+            </div>`;  
+             
         let select = document.getElementById("lenses-select");
         let lenseList = data.lenses;
         for(let i = 0; i < lenseList.length; i++){
@@ -61,6 +63,6 @@ function addToCart(product){
             productList.push(product);
         }   
         localStorage.setItem("cart", JSON.stringify(productList));
-        console.log(JSON.parse(localStorage.getItem("cart")));
+        document.getElementById("add-product-msg").setAttribute("class", "visible text-success mt-1");
     })
 }

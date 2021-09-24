@@ -54,7 +54,7 @@ function addToCart(product){
                 if(element.id === product.id)
                 {
                     element.quantity += parseInt(quantity,10);
-                    exist = true;
+                    exist = true;        
                 }
             }
         }        
@@ -64,5 +64,6 @@ function addToCart(product){
         }   
         localStorage.setItem("cart", JSON.stringify(productList));
         document.getElementById("add-product-msg").setAttribute("class", "visible text-success mt-1");
+        showNumberOfProduct(calculNumberOfProduct(productList));
     })
 }

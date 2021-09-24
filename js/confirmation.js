@@ -1,15 +1,13 @@
 let command = JSON.parse(localStorage.getItem("confirmation"));
 
-localStorage.removeItem("cart");
-
 let contact = command.contact;
 let id = command.orderId;
-let products = command.products;
+let products = JSON.parse(localStorage.getItem("cart"));
 
 let confirmationMsg = document.getElementById("confirmation-msg");
 confirmationMsg.innerHTML += `<div class="row mt-5">
     <div class="col">
-        <h1>Félicitation, votre commande a été enregistrée avec succès</h1>
+        <h1>Félicitations, votre commande a été enregistrée avec succès !</h1>
         <h2 class="h5">Numéro de commande: ${id}<h2>
     </div>
 </div>
@@ -40,8 +38,7 @@ confirmationMsg.innerHTML += `<div class="row mt-5">
 let totalPrice = 0;
 for(let product of products){
     console.log(product);
-    //let price = parseInt(product.price)/100*parseInt(product.quantity);
-    let price = parseInt(product.price)/100;
+    let price = parseInt(product.price)/100*parseInt(product.quantity);
     confirmationMsg.innerHTML += `<div class="row align-items-center py-2 border border-dark">
     <div class="col-2"><img class="img-fluid" src=${product.imageUrl} alt="Photo de l'appareil"></div>
     <div class="col">${product.name}</div>
@@ -55,4 +52,6 @@ confirmationMsg.innerHTML += `<div class="row mt-5">
     <div class="col mb-4">
     <h2>Total: ${totalPrice.toLocaleString('fr-FR', {style: 'currency', currency: 'EUR'})}</h2>
     </div>
-</div>`
+</div>`;
+
+localStorage.removeItem("cart");

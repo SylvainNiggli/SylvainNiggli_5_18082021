@@ -1,10 +1,11 @@
 let command = JSON.parse(localStorage.getItem("confirmation"));
+let products = JSON.parse(localStorage.getItem("cart"));
+let confirmationMsg = document.getElementById("confirmation-msg");
 
 let contact = command.contact;
 let id = command.orderId;
-let products = JSON.parse(localStorage.getItem("cart"));
+let totalPrice = 0;
 
-let confirmationMsg = document.getElementById("confirmation-msg");
 confirmationMsg.innerHTML += `<div class="row mt-5">
     <div class="col">
         <h1>Félicitations, votre commande a été enregistrée avec succès !</h1>
@@ -35,7 +36,6 @@ confirmationMsg.innerHTML += `<div class="row mt-5">
     </div>
 </div>`;
 
-let totalPrice = 0;
 for(let product of products){
     console.log(product);
     let price = parseInt(product.price)/100*parseInt(product.quantity);

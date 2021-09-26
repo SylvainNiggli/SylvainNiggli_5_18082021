@@ -1,4 +1,5 @@
-function send(e) {
+//Fonction d'envoie de la requête de commande
+function sendCommand(e) {
     let contact = {
         firstName: document.getElementById("firstName").value,
         lastName: document.getElementById("lastName").value,
@@ -40,9 +41,11 @@ function send(e) {
           localStorage.setItem("confirmation", JSON.stringify(value));
           window.location = "confirmation.html";
     });
-  }
-  
-  document
-    .getElementById("form")
-    .addEventListener("submit", send);
+}
+
+//Mise sur écoute de l'évènement "submit" avec appel de la fonction de commande
+//lorsque l'évènement se produit
+document
+  .getElementById("form")
+  .addEventListener("submit", sendCommand);
   

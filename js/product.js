@@ -1,5 +1,5 @@
 let products = document.getElementById("product");
-let id = window.location.search.substring(1).split('=')[1];
+
 
 class Product{
     constructor(id,name,description,price,lenses,imageUrl, quantity){
@@ -12,8 +12,13 @@ class Product{
         this.quantity = quantity;
     }
 }
+//Appel de la fonction d'affichage du produit
+displayProduct();
 
-fetch(`http://localhost:3000/api/cameras/${id}`)
+//Fonction d'affichage du produit
+function displayProduct(){
+    let id = window.location.search.substring(1).split('=')[1];
+    fetch(`http://localhost:3000/api/cameras/${id}`)
     .then(response => response.json())
     .then(data => {
         let product = new Product(data._id,data.name,data.description,data.price,data.lenses,data.imageUrl,1);
@@ -41,7 +46,11 @@ fetch(`http://localhost:3000/api/cameras/${id}`)
         } 
         addToCart(product);       
     });
+}
 
+
+//Fonction d'ajout d'un produit au panier
+//Paramètre: Produit
 function addToCart(product){
     let buttonAddToCart = document.getElementById("add-cart");
     buttonAddToCart.addEventListener("click", function(){
@@ -64,6 +73,6 @@ function addToCart(product){
         }   
         localStorage.setItem("cart", JSON.stringify(productList));
         document.getElementById("add-product-msg").setAttribute("class", "visible text-success mt-1");
-        showNumberOfProduct(calculNumberOfProduct(productList));
+        displayNumberOfProduct(calculNumberOfProduct(productList));
     })
 }

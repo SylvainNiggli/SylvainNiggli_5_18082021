@@ -1,5 +1,10 @@
 let productList = document.getElementById("product-list");
-fetch('http://localhost:3000/api/cameras')
+
+displayAllProducts();
+
+//Fonction d'affichage de tous les produits
+function displayAllProducts(){
+    fetch('http://localhost:3000/api/cameras')
     .then(response => response.json())
     .then(data => {
         data.forEach(element => {
@@ -17,3 +22,4 @@ fetch('http://localhost:3000/api/cameras')
         cpt++;
         });     
     });
+}
